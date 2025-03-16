@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Brother\'s Birthday App</string>
+    <string name="games">Games</string>
+    <string name="home">Home</string>
+    <string name="my_coins">My Coins</string>
+    <string name="music">MUSIC</string>
+    <string name="hero_name">Serega</string>
+
+
+    <string name="coins">Coins</string>
+    <string name="coins_for_rewards">Coins for Rewards</string>
+    <string name="gift">GIFT #</string>
+
+
+</resources>
