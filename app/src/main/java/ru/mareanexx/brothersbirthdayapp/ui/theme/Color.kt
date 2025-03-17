@@ -89,3 +89,27 @@ val galleryBackground = Color(0x40F896FF)
 val galleryTitle = Color(0xFF720CAD)
 val galleryCaption = Color(0xFF781D8B)
 val galleryButton = Color(0xFF8E0795)
+
+
+// Roblox Quiz Screen Colors
+val robloxQuizMainText = Color(0xFF2F0071)
+val robloxTopMenuBackground = Color(0xFF8C9FFF)
+val aroundDigitColor = Color(0xFF4B43B9)
+
+val greenAnswerButtonBackground = Color(0xFF6AF3A9)
+val greenAnswerText = Color(0xFF058916)
+val redAnswerButtonBackground = Color(0xFFFF7C7C)
+val redAnswerText = Color(0xFF8F0000)
+val blueAnswerButtonBackground = Color(0xFF83E4F6)
+val blueAnswerText = Color(0xFF003AAE)
+val yellowAnswerButtonBackground = Color(0xFFFFC87B)
+val yellowAnswerText = Color(0xFF9C7906)
+
+val heart = Color(0xFFF30000)
+
+val disabledCheckButton = Color(0xFFC2C2C2)
+
+
+// SerGallery Screen Colors
+val serGalleryTopMenuBackground = Color(0xFF3B3B3B)
+val serGalleryTopMenuText = Color(0xFFE7E7E7)

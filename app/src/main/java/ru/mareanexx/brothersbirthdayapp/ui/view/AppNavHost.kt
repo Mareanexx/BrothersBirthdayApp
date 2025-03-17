@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.GamesScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.HomeScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.MyCoinsScreen
+import ru.mareanexx.brothersbirthdayapp.ui.view.screen.RobloxQuizScreen
+import ru.mareanexx.brothersbirthdayapp.ui.view.screen.SerGalleryScreen
 
 
 @Composable
@@ -23,5 +25,7 @@ fun AppNavHost(navController: NavHostController) {
         composable("home") { HomeScreen(navController) }
         composable("games") { GamesScreen(navController) }
         composable("my_coins") { MyCoinsScreen(navController) }
+        composable("roblox_quiz") { RobloxQuizScreen(navController) }
+        composable("sergallery") { SerGalleryScreen(navController) }
     }
 }

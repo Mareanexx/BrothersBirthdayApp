@@ -10,6 +10,9 @@
     <string name="coins">Coins</string>
     <string name="coins_for_rewards">Coins for Rewards</string>
     <string name="gift">GIFT #</string>
+    <string name="arrow_back">Get Back to the Previous Screen</string>
+    <string name="roblox_quiz">Roblox Quiz</string>
+    <string name="ser_gallery">SerGallery</string>
 
 
 </resources>
