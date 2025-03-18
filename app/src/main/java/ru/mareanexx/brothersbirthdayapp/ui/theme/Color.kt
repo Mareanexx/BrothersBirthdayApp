@@ -112,4 +112,12 @@ val disabledCheckButton = Color(0xFFC2C2C2)
 
 // SerGallery Screen Colors
 val serGalleryTopMenuBackground = Color(0xFF3B3B3B)
-val serGalleryTopMenuText = Color(0xFFE7E7E7)
+val serGalleryMainColor = Color(0xFFE7E7E7)
+val imageDetailIcons = Color(0xFF6B6B6B)
+val imageDetailHashtagTextColor = Color(0xFF1E2082)
+val hashTagBackground = Color(0xFFC9DBFF)
+val likedBackground = Color(0xFFFFD3D3)
+val likedContent = Color(0xFFFF4646)
+
+val imageDetailUsernameText = Color(0xFF4E4E4E)
+val imageDetailCaption = Color(0xFF989898)
