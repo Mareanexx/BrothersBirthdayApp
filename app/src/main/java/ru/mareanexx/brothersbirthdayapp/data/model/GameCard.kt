@@ -6,6 +6,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.robloxTitle
 
 data class GameCard(
     @DrawableRes val imageRes: Int,
+    val routePath: String,
     val reward: Int,
     val name: String,
     val caption: String,

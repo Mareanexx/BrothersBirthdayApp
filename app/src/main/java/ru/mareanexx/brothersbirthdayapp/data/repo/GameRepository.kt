@@ -29,6 +29,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatTitle
 val gameRepository = listOf(
     GameCard(
         imageRes = R.drawable.roblox,
+        routePath = "roblox_quiz",
         reward = 100,
         name = "Roblox Quiz",
         caption = "Answer some questions about Roblox",
@@ -38,6 +39,7 @@ val gameRepository = listOf(
     ),
     GameCard(
         imageRes = R.drawable.videochat,
+        routePath = "video_chat",
         reward = 120,
         name = "Video Chat",
         caption = "Watch video greetings from your relatives",
@@ -49,6 +51,7 @@ val gameRepository = listOf(
 
     GameCard(
         imageRes = R.drawable.quest,
+        routePath = "quest",
         reward = 100,
         name = "Quest",
         caption = "Complete the quest in English and defeat the villain",
@@ -60,6 +63,7 @@ val gameRepository = listOf(
 
     GameCard(
         imageRes = R.drawable.crossword,
+        routePath = "crossword",
         reward = 100,
         name = "Crossword",
         caption = "Solve the crossword with funny questions about our family",
@@ -71,6 +75,7 @@ val gameRepository = listOf(
 
     GameCard(
         imageRes = R.drawable.greeting,
+        routePath = "greetings",
         reward = 100,
         name = "Random Greet",
         caption = "Read funny birthday greetings and laugh a lot",
@@ -82,6 +87,7 @@ val gameRepository = listOf(
 
     GameCard(
         imageRes = R.drawable.sergallery,
+        routePath = "sergallery",
         reward = 100,
         name = "SerGallery",
         caption = "See your photos of all time with stupid captions",
