@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# All img's in assets
+app/src/main/assets/
