@@ -120,7 +120,9 @@ fun GamesScreen(navController: NavController?) {
                 horizontalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 items(gameRepository) {
-                    item: GameCard -> GameCard(gameCard = item) { TODO() }
+                    item: GameCard -> GameCard(gameCard = item) {
+                        navController?.navigate(route = item.routePath)
+                    }
                 }
             }
         }
