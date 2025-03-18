@@ -61,7 +61,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.robloxQuizMainText
 import ru.mareanexx.brothersbirthdayapp.ui.theme.robloxTopMenuBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.yellowAnswerButtonBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.yellowAnswerText
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.PreviousScreenButton
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.PreviousScreenButton
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.CorrectAnswerDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.EndOfGameDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.IncorrectAnswerDialog

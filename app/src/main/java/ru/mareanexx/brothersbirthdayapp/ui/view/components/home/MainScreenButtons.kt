@@ -1,4 +1,4 @@
-package ru.mareanexx.brothersbirthdayapp.ui.view.components.buttons
+package ru.mareanexx.brothersbirthdayapp.ui.view.components.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

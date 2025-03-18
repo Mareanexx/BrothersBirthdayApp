@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.BottomNavBar
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.buttons.FAQButton
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.buttons.MusicButton
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.home.FAQButton
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.home.MusicButton
 
 @Composable
 fun HomeScreen(navController: NavController?) {
@@ -46,9 +46,9 @@ fun HomeScreen(navController: NavController?) {
                 horizontalArrangement = Arrangement.Center
 
             ) {
-                MusicButton { TODO() }
+                MusicButton { TODO("Реализовать включение конфетти") }
                 Spacer(modifier = Modifier.width(15.dp))
-                FAQButton { TODO() }
+                FAQButton { TODO("Реализовать диалоговое окно с описанием что нужно делать в приложении") }
 
             }
             BottomNavBar(navController, 2)

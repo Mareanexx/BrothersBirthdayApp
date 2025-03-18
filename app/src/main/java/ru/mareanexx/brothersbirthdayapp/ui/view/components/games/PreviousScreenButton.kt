@@ -1,4 +1,4 @@
-package ru.mareanexx.brothersbirthdayapp.ui.view.components
+package ru.mareanexx.brothersbirthdayapp.ui.view.components.games
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
