@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.data.model.GameCard
-import ru.mareanexx.brothersbirthdayapp.data.repo.gameRepository
+import ru.mareanexx.brothersbirthdayapp.data.repo.GamesDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
 import ru.mareanexx.brothersbirthdayapp.ui.theme.coinCounter
@@ -119,7 +119,7 @@ fun GamesScreen(navController: NavController?) {
                 verticalArrangement = Arrangement.spacedBy(14.dp),
                 horizontalArrangement = Arrangement.spacedBy(14.dp)
             ) {
-                items(gameRepository) {
+                items(GamesDB.gameRepository) {
                     item: GameCard -> GameCard(gameCard = item) {
                         navController?.navigate(route = item.routePath)
                     }
@@ -237,7 +237,7 @@ fun RewardOfCoinsBlock() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewGameCard() {
-    GameCard(gameRepository[1]) {}
+    GameCard(GamesDB.gameRepository[1]) {}
 }
 
 

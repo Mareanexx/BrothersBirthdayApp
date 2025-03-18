@@ -26,7 +26,11 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatButtonPlay
 import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatCaption
 import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatTitle
 
-val gameRepository = listOf(
+/**
+ * Условная база данных всех карточек игр (GameCard).
+ */
+object GamesDB {
+    val gameRepository = listOf(
     GameCard(
         imageRes = R.drawable.roblox,
         routePath = "roblox_quiz",
@@ -96,5 +100,5 @@ val gameRepository = listOf(
         captionTextColor = galleryCaption,
         buttonColor = galleryButton
     )
-
 )
+}
