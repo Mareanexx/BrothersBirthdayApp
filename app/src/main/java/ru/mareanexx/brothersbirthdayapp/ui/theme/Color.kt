@@ -121,3 +121,18 @@ val likedContent = Color(0xFFFF4646)
 
 val imageDetailUsernameText = Color(0xFF4E4E4E)
 val imageDetailCaption = Color(0xFF989898)
+
+
+// Video Chat Screen
+val videoChatTopBarBackground = Color(0xFFAC83F3)
+val videoChatMainViolet = Color(0xFF4C2391)
+val numberOfUnreadMessagesBackground = Color(0xFF733ECF)
+
+val ambientColor = Color(0x12000000)
+val spotColor = Color(0x24000000)
+
+val writeMessageBackground = Color(0xFFE8DEFB)
+
+val directChatTimeText = Color(0xFF575757)
+val messageTextColor = Color(0xFF595959)
+val messageBlockBackground = Color(0xFFF2F5FF)
