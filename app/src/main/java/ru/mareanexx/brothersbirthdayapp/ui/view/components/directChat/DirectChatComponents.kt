@@ -47,6 +47,7 @@ fun TopBarDirectChat(
                 color = videoChatTopBarBackground,
                 shape = RoundedCornerShape(bottomEnd = 25.dp, bottomStart = 25.dp)
             )
+            .padding(top = 15.dp)
             .systemBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -57,7 +58,9 @@ fun TopBarDirectChat(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            PreviousScreenButton(navController, videoChatMainViolet, Color.White)
+            PreviousScreenButton(videoChatMainViolet, Color.White, navigateTo = {
+                navController?.popBackStack()
+            })
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

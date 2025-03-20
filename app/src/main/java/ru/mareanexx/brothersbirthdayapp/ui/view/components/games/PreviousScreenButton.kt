@@ -12,14 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
 
 @Composable
 fun PreviousScreenButton(
-    navController: NavController?,
     backgroundColor: Color,
-    iconColor: Color
+    iconColor: Color,
+    navigateTo: () -> Unit
 ) {
     Icon(
         modifier = Modifier
@@ -28,10 +27,11 @@ fun PreviousScreenButton(
                 color = backgroundColor,
                 shape = RoundedCornerShape(10.dp)
             ).clickable {
-                navController?.navigate("games") {
-                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
-                    launchSingleTop = true
-                }
+//                navController?.navigate("games") {
+//                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+//                    launchSingleTop = true
+//                }
+                navigateTo()
             },
         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
         contentDescription = stringResource(R.string.arrow_back),

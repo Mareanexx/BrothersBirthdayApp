@@ -39,6 +39,7 @@ fun TopBarVideoChat(
                 color = videoChatTopBarBackground,
                 shape = RoundedCornerShape(bottomEnd = 25.dp, bottomStart = 25.dp)
             )
+            .padding(top = 15.dp)
             .systemBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -48,7 +49,12 @@ fun TopBarVideoChat(
                 .padding(horizontal = 15.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            PreviousScreenButton(navController, videoChatMainViolet, Color.White)
+            PreviousScreenButton(videoChatMainViolet, Color.White, navigateTo = {
+                navController?.navigate("games") {
+                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                    launchSingleTop = true
+                }
+            })
             Text(
                 modifier = Modifier.padding(start = 80.dp),
                 text = stringResource(R.string.video_chat),

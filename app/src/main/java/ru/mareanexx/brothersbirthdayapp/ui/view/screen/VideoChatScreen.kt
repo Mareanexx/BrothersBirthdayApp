@@ -138,7 +138,7 @@ fun DialogItem(
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                val lastMessageText = (dialog.messages.last { it is TextMessage } as TextMessage).text
+                val lastMessageText = (dialog.messages.last { it is TextMessage } as TextMessage).text.take(23)
 
                 Text(
                     color = imageDetailCaption,

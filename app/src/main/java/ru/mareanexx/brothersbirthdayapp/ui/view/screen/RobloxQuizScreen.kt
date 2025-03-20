@@ -61,14 +61,17 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.robloxQuizMainText
 import ru.mareanexx.brothersbirthdayapp.ui.theme.robloxTopMenuBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.yellowAnswerButtonBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.yellowAnswerText
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.PreviousScreenButton
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.CorrectAnswerDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.EndOfGameDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.IncorrectAnswerDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.OneHeartItem
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.PreviousScreenButton
 
 @Composable
 fun RobloxQuizScreen(navController: NavController?) {
+    RobloxQuizDatabase.questionRepository.shuffle()
+    RobloxQuizDatabase.imageRepository.shuffle()
+
     var numberOfQuestion by remember { mutableIntStateOf(0) }
     var tempImage by remember { mutableStateOf<RobloxImage>(RobloxQuizDatabase.imageRepository[numberOfQuestion]) }
     var tempQuestion by remember { mutableStateOf<RobloxQuizQuestion>(RobloxQuizDatabase.questionRepository[numberOfQuestion]) }
@@ -206,10 +209,10 @@ fun QuestionCard(
             )
             Text(
                 text = robloxQuizQuestion.question,
-                fontSize = 22.sp,
+                fontSize = 20.sp,
                 fontFamily = MontserratFamily,
                 fontWeight = FontWeight.Bold,
-                lineHeight = 22.sp
+                lineHeight = 20.sp
             )
         }
         GridListOfAnswers(robloxQuizQuestion, chosenVariant, onChooseVariant)
@@ -274,8 +277,8 @@ fun OneBlockOfAnswer(
             color = textAndBackgroundColors.second,
             fontFamily = MontserratFamily,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 20.sp,
-            lineHeight = 20.sp,
+            fontSize = 18.sp,
+            lineHeight = 18.sp,
             textAlign = TextAlign.Center
         )
     }
@@ -296,7 +299,8 @@ fun TopMenuRobloxQuizScreen(
                 color = robloxTopMenuBackground,
                 shape = RoundedCornerShape(bottomEnd = 25.dp, bottomStart = 25.dp)
             )
-            .systemBarsPadding(),
+            .systemBarsPadding()
+            .padding(top = 10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Row(
@@ -306,7 +310,12 @@ fun TopMenuRobloxQuizScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            PreviousScreenButton(navController, robloxQuizMainText, Color.White)
+            PreviousScreenButton(robloxQuizMainText, Color.White, navigateTo = {
+                navController?.navigate("games") {
+                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                    launchSingleTop = true
+                }
+            })
             Text(
                 modifier = Modifier.padding(start = 40.dp),
                 text = stringResource(R.string.roblox_quiz),
@@ -316,8 +325,7 @@ fun TopMenuRobloxQuizScreen(
                 fontSize = 24.sp,
                 lineHeight = 24.sp
             )
-            Row(
-            ) {
+            Row {
                 OneHeartItem( if (numberOfMistakes >= 1) Color.White else heart )
                 OneHeartItem( if (numberOfMistakes >= 2) Color.White else heart )
                 OneHeartItem( if (numberOfMistakes >= 3) Color.White else heart )

@@ -62,7 +62,7 @@ fun GamesScreen(navController: NavController?) {
         ) {
             Row(
                 modifier = Modifier
-                    .padding(horizontal = 20.dp)
+                    .padding(horizontal = 30.dp)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -100,7 +100,7 @@ fun GamesScreen(navController: NavController?) {
         }
         Column(
             modifier = Modifier
-                .padding(top = 100.dp)
+                .padding(top = 120.dp)
                 .fillMaxSize()
                 .background(color = Color.White, shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))
         ) {
@@ -115,7 +115,7 @@ fun GamesScreen(navController: NavController?) {
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
-                contentPadding = PaddingValues(start = 22.dp, end = 22.dp, bottom = 150.dp),
+                contentPadding = PaddingValues(start = 15.dp, end = 15.dp, bottom = 130.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp),
                 horizontalArrangement = Arrangement.spacedBy(14.dp)
             ) {
@@ -139,7 +139,7 @@ fun GameCard(
             .height(254.dp)
             .fillMaxWidth()
             .background(
-            color = gameCard.backgroundColor, shape = Shapes.medium
+                color = gameCard.backgroundColor, shape = Shapes.medium
         ).padding(15.dp)
     ) {
         Row(
@@ -182,6 +182,7 @@ fun GameCard(
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             lineHeight = 18.sp,
+            maxLines = 4,
             color = gameCard.captionTextColor
         )
         Spacer(modifier = Modifier.weight(1f))

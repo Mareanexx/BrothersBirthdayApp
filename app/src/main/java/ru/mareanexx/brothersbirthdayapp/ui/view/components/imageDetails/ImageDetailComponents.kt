@@ -49,12 +49,16 @@ fun GetBackToGalleryButton(
     IconButton(
         modifier = Modifier
             .padding(top = 10.dp, start = 10.dp)
-            .background(color = Color.White, shape = Shapes.small),
+            .background(
+                color = Color.White.copy(alpha = 0.3f),
+                shape = Shapes.medium
+            ),
         onClick = { navController?.popBackStack() }
     ) {
         Icon(
             modifier = Modifier.size(50.dp),
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+            tint = Color.White,
             contentDescription = null
         )
     }

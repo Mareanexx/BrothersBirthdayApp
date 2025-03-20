@@ -57,7 +57,7 @@ fun AppNavHost(navController: NavHostController) {
 
         composable("direct_chat/{chatId}",
             arguments = listOf(navArgument("chatId") { type = NavType.IntType} ),
-            enterTransition = { slideInHorizontally() }
+            enterTransition = { slideInHorizontally(tween(300)) }
         ) {
             backStackEntry ->
             val chatId = backStackEntry.arguments?.getInt("chatId") ?: return@composable

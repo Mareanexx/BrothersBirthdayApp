@@ -63,10 +63,13 @@ fun MyCoinsScreen(navController: NavController?) {
         ) {
             HeaderMyCoinsWithHeroImage()
 
-            HorizontalDivider(thickness = 1.dp, color = horizontalDivider)
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 17.dp),
+                thickness = 1.dp, color = horizontalDivider
+            )
 
             Text(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 17.dp),
+                modifier = Modifier.fillMaxWidth().padding(bottom = 17.dp),
                 textAlign = TextAlign.Center,
                 text = stringResource(R.string.coins_for_rewards),
                 fontFamily = MontserratFamily,
@@ -136,7 +139,8 @@ fun SwitcherAllGiftsUnlocked(
 @Composable
 fun HeaderMyCoinsWithHeroImage() {
     Row(
-        modifier = Modifier.systemBarsPadding()
+        modifier = Modifier
+            .systemBarsPadding()
             .fillMaxWidth()
             .height(IntrinsicSize.Max),
         horizontalArrangement = Arrangement.SpaceEvenly,

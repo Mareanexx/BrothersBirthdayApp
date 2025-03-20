@@ -104,6 +104,7 @@ fun TopBarSerGalleryScreen(
                 color = serGalleryTopMenuBackground,
                 shape = RoundedCornerShape(bottomEnd = 25.dp, bottomStart = 25.dp)
             )
+            .padding(top = 15.dp)
             .systemBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -113,7 +114,12 @@ fun TopBarSerGalleryScreen(
                 .padding(horizontal = 15.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            PreviousScreenButton(navController, serGalleryMainColor, Color.Black)
+            PreviousScreenButton(serGalleryMainColor, Color.Black, navigateTo = {
+                navController?.navigate("games") {
+                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                    launchSingleTop = true
+                }
+            })
             Text(
                 modifier = Modifier.padding(start = 90.dp),
                 text = stringResource(R.string.ser_gallery),
