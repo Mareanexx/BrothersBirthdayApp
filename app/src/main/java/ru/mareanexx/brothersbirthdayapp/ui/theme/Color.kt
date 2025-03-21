@@ -43,6 +43,8 @@ val unlockedButtonBackground = Color(0xFFEEEEEE)
 val levelText = Color(0xFF8B8B8B)
 val giftText = Color(0xFF3F3F3F)
 val greenBackground = Color(0xFF78FF9C)
+val giftBottomPanelBackground = Color(0xFFF5F5F5)
+val secretCodeBackground = Color(0xFFD9D9D9)
 
 // Coin Block Background
 val coinBlockBackground = Color(0xFFFFD54B)

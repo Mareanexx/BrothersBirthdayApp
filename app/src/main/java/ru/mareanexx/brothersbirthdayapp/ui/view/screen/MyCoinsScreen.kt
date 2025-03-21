@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -34,7 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
-import ru.mareanexx.brothersbirthdayapp.data.repo.giftRepository
+import ru.mareanexx.brothersbirthdayapp.data.model.Gift
+import ru.mareanexx.brothersbirthdayapp.data.repo.GiftDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
 import ru.mareanexx.brothersbirthdayapp.ui.theme.faqButton
@@ -79,13 +82,13 @@ fun MyCoinsScreen(navController: NavController?) {
 
             SwitcherAllGiftsUnlocked(onOpenAllGifts = { TODO() }, onOpenUnlocked = { TODO() })
 
-            Column(
+            LazyColumn(
                 modifier = Modifier.padding(top = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                GiftItem(giftRepository[0])
-                GiftItem(giftRepository[1])
-                GiftItem(giftRepository[2])
+                items(GiftDB.giftRepository) {
+                    gift: Gift -> GiftItem(gift)
+                }
             }
         }
         Spacer(modifier = Modifier.weight(1f))

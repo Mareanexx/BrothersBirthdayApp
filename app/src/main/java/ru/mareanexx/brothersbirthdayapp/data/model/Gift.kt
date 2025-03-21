@@ -7,5 +7,6 @@ data class Gift(
     val priceInCoins: Int,
     val level: String,
     @DrawableRes val giftIcon: Int,
-    var isReceived: Boolean
+    var isReceived: Boolean,
+    val secretCode: String
 )
