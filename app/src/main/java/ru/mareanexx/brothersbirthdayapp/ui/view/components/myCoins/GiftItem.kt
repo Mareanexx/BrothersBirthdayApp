@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -109,8 +110,9 @@ fun NumberOfCoinsBlock(
             contentDescription = stringResource(R.string.coins)
         )
         Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             Text(
                 text = priceInCoins,
@@ -118,7 +120,7 @@ fun NumberOfCoinsBlock(
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Bold,
                 color = faqButton,
-                lineHeight = 15.sp
+                lineHeight = 12.sp
             )
             Text(
                 text = "coins",
@@ -126,7 +128,7 @@ fun NumberOfCoinsBlock(
                 fontWeight = FontWeight.Medium,
                 color = faqButton,
                 fontSize = 12.sp,
-                lineHeight = 12.sp
+                lineHeight = 10.sp
             )
         }
     }

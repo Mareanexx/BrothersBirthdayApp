@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
@@ -46,7 +47,7 @@ fun CorrectAnswerDialog(
             modifier = Modifier
                 .width(width = 255.dp)
                 .wrapContentHeight()
-                .background(color = Color.White, shape = Shapes.large)
+                .background(color = Color.White, shape = RoundedCornerShape(size = 10.dp))
                 .padding(horizontal = 40.dp, vertical = 20.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -92,7 +93,7 @@ fun IncorrectAnswerDialog(
             modifier = Modifier
                 .wrapContentWidth()
                 .wrapContentHeight()
-                .background(color = Color.White, shape = Shapes.large)
+                .background(color = Color.White, shape = RoundedCornerShape(size = 10.dp))
                 .padding(horizontal = 30.dp, vertical = 15.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -161,7 +162,7 @@ fun EndOfGameDialog(
             modifier = Modifier
                 .width(350.dp)
                 .wrapContentHeight()
-                .background(color = Color.White, shape = Shapes.large)
+                .background(color = Color.White, shape = RoundedCornerShape(size = 10.dp))
                 .padding(horizontal = 20.dp, vertical = 15.dp),
             horizontalAlignment = Alignment.CenterHorizontally
 

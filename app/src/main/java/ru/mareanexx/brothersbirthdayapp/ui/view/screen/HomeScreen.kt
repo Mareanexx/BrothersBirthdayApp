@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -20,11 +22,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.BottomNavBar
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.dialogs.WhatToDoDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.home.FAQButton
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.home.MusicButton
 
 @Composable
 fun HomeScreen(navController: NavController?) {
+    val isFAQdialogOpened = remember { mutableStateOf(false) }
+
+    if (isFAQdialogOpened.value) {
+        WhatToDoDialog { isFAQdialogOpened.value = false }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -44,12 +53,12 @@ fun HomeScreen(navController: NavController?) {
                     .fillMaxWidth()
                     .padding(bottom = 40.dp),
                 horizontalArrangement = Arrangement.Center
-
             ) {
                 MusicButton { TODO("Реализовать включение конфетти") }
                 Spacer(modifier = Modifier.width(15.dp))
-                FAQButton { TODO("Реализовать диалоговое окно с описанием что нужно делать в приложении") }
-
+                FAQButton {
+                    isFAQdialogOpened.value = true
+                }
             }
             BottomNavBar(navController, 2)
         }
