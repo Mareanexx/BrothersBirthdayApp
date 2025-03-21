@@ -1,18 +1,19 @@
 package ru.mareanexx.brothersbirthdayapp.ui.view.components.home
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -24,26 +25,32 @@ import androidx.compose.ui.unit.sp
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
-import ru.mareanexx.brothersbirthdayapp.ui.theme.disabledMusicButton
-import ru.mareanexx.brothersbirthdayapp.ui.theme.enabledMusicButton
 import ru.mareanexx.brothersbirthdayapp.ui.theme.faqButton
+import ru.mareanexx.brothersbirthdayapp.ui.theme.onPauseMusicButton
+import ru.mareanexx.brothersbirthdayapp.ui.theme.onPlayMusicButton
 
 @Composable
 fun MusicButton(
-    onStartConfetti: () -> Unit
+    isMusicPlaying: MutableState<Boolean>,
+    onMusicPlayingSwitch: () -> Unit
 ) {
+    val color = animateColorAsState(
+        targetValue = if (isMusicPlaying.value) onPauseMusicButton else onPlayMusicButton,
+        label = "Animate Music Color Button"
+    )
+
     Button(
         modifier = Modifier.border(
             width = 4.dp, color = Color.White,
             shape = Shapes.extraLarge
         ).height(62.dp),
-        onClick = onStartConfetti,
-        contentPadding = PaddingValues(start = 30.dp, end = 18.dp, top = 10.dp, bottom = 10.dp),
-        colors = ButtonColors(
-            containerColor = disabledMusicButton,
-            contentColor = Color.White,
-            disabledContainerColor = enabledMusicButton,
-            disabledContentColor = Color.White
+        onClick = {
+            onMusicPlayingSwitch()
+        },
+        contentPadding = PaddingValues(start = 30.dp, end = 30.dp, top = 10.dp, bottom = 10.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = color.value,
+            contentColor = Color.White
         )
     ) {
         Text(
@@ -56,8 +63,8 @@ fun MusicButton(
             letterSpacing = 1.5.sp
         )
         Icon(
-            modifier = Modifier.size(40.dp),
-            imageVector = Icons.Default.PlayArrow,
+            modifier = Modifier.size(35.dp).padding(start = 10.dp),
+            painter = painterResource( if (!isMusicPlaying.value) R.drawable.play_icon else R.drawable.pause_icon),
             contentDescription = "Play Button"
         )
     }
@@ -87,7 +94,7 @@ fun FAQButton(
 @Composable
 @Preview
 fun PreviewMusicButton() {
-    MusicButton(onStartConfetti = {  })
+    // MusicButton(onMusicPlayingSwitch = {}, isMusicPlaying = mutableStateOf(false))
 }
 
 @Composable

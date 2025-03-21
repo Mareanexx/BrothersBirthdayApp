@@ -15,8 +15,8 @@ val bottomNav = Color(0xFF3A3A3A)
 val navBarItems = Color(0xFFE0E0E0)
 
 // MUSIC button
-val disabledMusicButton = Color(0xFF85C91E)
-val enabledMusicButton = Color(0xFFD81F1F)
+val onPlayMusicButton = Color(0xFF85C91E)
+val onPauseMusicButton = Color(0xFFD81F1F)
 
 // FAQ Button
 val faqButton = Color(0xFF505050)
