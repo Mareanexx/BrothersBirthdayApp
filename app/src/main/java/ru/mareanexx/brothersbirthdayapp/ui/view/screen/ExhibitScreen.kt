@@ -37,7 +37,6 @@ fun ExhibitScreen(navController: NavController?, itemId: Int) {
         BitmapFactory.decodeStream(context.assets.open(museumExhibit.pictureImagePath)).asImageBitmap()
     }
 
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +48,7 @@ fun ExhibitScreen(navController: NavController?, itemId: Int) {
                 modifier = Modifier.fillMaxWidth().padding(end = 15.dp),
                 bitmap = exhibitImageBitmap,
                 contentDescription = "Exhibit Image",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.FillWidth
             )
             Row(
                 modifier = Modifier.fillMaxWidth().padding(end = 30.dp),
@@ -70,5 +69,5 @@ fun ExhibitScreen(navController: NavController?, itemId: Int) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewExhibitScreen() {
-    ExhibitScreen(null, 3)
+    ExhibitScreen(null, 4)
 }

@@ -31,7 +31,7 @@ object MuseumExhibitDB {
         MuseumExhibit(
             id = 4,
             doorImagePath = "doors/door4.png",
-            pictureImagePath = "pictures/pic1.png",
+            pictureImagePath = "doors/exhibits/exhibit4.png",
             caption = "Смоук вид эвридей ъеъ",
             year = "(2029)",
             blackCaption = "Сергей Макгрегор"
@@ -39,7 +39,7 @@ object MuseumExhibitDB {
         MuseumExhibit(
             id = 5,
             doorImagePath = "doors/door5.png",
-            pictureImagePath = "pictures/pic1.png",
+            pictureImagePath = "pdoors/exhibits/exhibit5.png",
             caption = "Смоук вид эвридей ъеъ",
             year = "(2029)",
             blackCaption = "Сергей Макгрегор"
@@ -47,7 +47,7 @@ object MuseumExhibitDB {
         MuseumExhibit(
             id = 6,
             doorImagePath = "doors/door6.png",
-            pictureImagePath = "pictures/pic1.png",
+            pictureImagePath = "doors/exhibits/exhibit6.png",
             caption = "Смоук вид эвридей ъеъ",
             year = "(2029)",
             blackCaption = "Сергей Макгрегор"
@@ -55,7 +55,7 @@ object MuseumExhibitDB {
         MuseumExhibit(
             id = 7,
             doorImagePath = "doors/door7.png",
-            pictureImagePath = "pictures/pic1.png",
+            pictureImagePath = "doors/exhibits/exhibit7.png",
             caption = "Смоук вид эвридей ъеъ",
             year = "(2029)",
             blackCaption = "Сергей Макгрегор"
@@ -63,7 +63,7 @@ object MuseumExhibitDB {
         MuseumExhibit(
             id = 8,
             doorImagePath = "doors/door8.png",
-            pictureImagePath = "pictures/pic1.png",
+            pictureImagePath = "doors/exhibits/exhibit8.png",
             caption = "Смоук вид эвридей ъеъ",
             year = "(2029)",
             blackCaption = "Сергей Макгрегор"
