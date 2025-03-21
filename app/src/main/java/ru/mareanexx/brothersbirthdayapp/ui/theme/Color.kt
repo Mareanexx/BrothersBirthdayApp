@@ -136,3 +136,17 @@ val writeMessageBackground = Color(0xFFE8DEFB)
 val directChatTimeText = Color(0xFF575757)
 val messageTextColor = Color(0xFF595959)
 val messageBlockBackground = Color(0xFFF2F5FF)
+
+
+// Museum Screen
+val museumTopBarBackground = Color(0xFFFFF082)
+val museumTopBarPrimary = Color(0xFF98851B)
+val museumMainBackground = Color(0xFFE4D5C1)
+
+val museumTopBarDigitColor = Color(0xFF444444)
+
+// Exhibit Screen
+val exhibitAnnotationBackground = Color(0xFFF6F6F6)
+val exhibitAnnotaionCircle = Color(0xFF747474)
+
+val exhibitYearColor = Color(0xFF9C9C9C)

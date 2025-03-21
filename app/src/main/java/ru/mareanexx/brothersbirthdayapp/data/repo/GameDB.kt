@@ -78,11 +78,11 @@ object GamesDB {
     ),
 
     GameCard(
-        imageRes = R.drawable.greeting,
-        routePath = "greetings",
+        imageRes = R.drawable.museum,
+        routePath = "museum",
         reward = 100,
-        name = "Random Greet",
-        caption = "Read funny birthday greetings and laugh a lot",
+        name = "Museum",
+        caption = "Choose a door and explore the museum exhibits",
         backgroundColor = greetingBackground,
         mainTextColor = greetingTitle,
         captionTextColor = greetingCaption,
