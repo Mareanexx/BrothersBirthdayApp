@@ -23,6 +23,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -55,7 +58,9 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.components.myCoins.GiftItem
 
 @Composable
 fun MyCoinsScreen(navController: NavController?) {
-    Column(
+    val isLeftButtonActive = remember { mutableStateOf(true) }
+
+    Box(
         modifier = Modifier
             .systemBarsPadding()
             .fillMaxSize(),
@@ -80,19 +85,31 @@ fun MyCoinsScreen(navController: NavController?) {
                 fontWeight = FontWeight.ExtraBold
             )
 
-            SwitcherAllGiftsUnlocked(onOpenAllGifts = { TODO() }, onOpenUnlocked = { TODO() })
+            SwitcherAllGiftsUnlocked(
+                isLeftButtonActive,
+                onOpenAllGifts = {
+                    isLeftButtonActive.value = true
+                }, onOpenUnlocked = {
+                    isLeftButtonActive.value = false
+                }
+            )
 
             LazyColumn(
-                modifier = Modifier.padding(top = 15.dp),
+                modifier = Modifier.padding(top = 15.dp, bottom = 100.dp),
                 verticalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                items(GiftDB.giftRepository) {
-                    gift: Gift -> GiftItem(gift)
+                if (isLeftButtonActive.value) {
+                    items(GiftDB.giftRepository) {
+                        gift: Gift -> GiftItem(gift)
+                    }
+                } else {
+                    items(GiftDB.giftRepository.filter { it.isReceived }) {
+                        gift: Gift -> GiftItem(gift)
+                    }
                 }
             }
         }
-        Spacer(modifier = Modifier.weight(1f))
-        BottomNavBar(navController,3)
+        BottomNavBar(navController,3, modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
@@ -100,9 +117,23 @@ fun MyCoinsScreen(navController: NavController?) {
 
 @Composable
 fun SwitcherAllGiftsUnlocked(
+    isLeftButtonActive: MutableState<Boolean>,
     onOpenAllGifts: () -> Unit,
     onOpenUnlocked: () -> Unit
 ) {
+    val switchedColors = object {
+        var leftButtonColor : Color = faqButton
+        var leftTextColor: Color = Color.White
+        var rightButtonColor: Color = unlockedButtonBackground
+        var rightTextColor: Color = faqButton
+    }
+    if (!isLeftButtonActive.value) { switchedColors.apply {
+        leftButtonColor = unlockedButtonBackground
+        leftTextColor = faqButton
+        rightButtonColor = faqButton
+        rightTextColor = Color.White
+    }}
+
     Row (
         modifier = Modifier
             .height(42.dp).fillMaxWidth()
@@ -112,26 +143,31 @@ fun SwitcherAllGiftsUnlocked(
         Button( // Button for tab All Gifts
             modifier = Modifier.weight(1f),
             onClick = onOpenAllGifts,
-            colors = ButtonDefaults.buttonColors(containerColor = faqButton)
+            colors = ButtonDefaults.buttonColors(
+                containerColor = switchedColors.leftButtonColor
+            )
         ) {
             Text(
                 text = "All gifts",
                 fontFamily = MontserratFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
+                color = switchedColors.leftTextColor
             )
         }
         Button( // Button for tab Unlocked Gifts
             modifier = Modifier.weight(1f),
             onClick = onOpenUnlocked,
-            colors = ButtonDefaults.buttonColors(containerColor = unlockedButtonBackground)
+            colors = ButtonDefaults.buttonColors(
+                containerColor = switchedColors.rightButtonColor
+            )
         ) {
             Text(
                 text = "Unlocked",
                 fontFamily = MontserratFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
-                color = faqButton
+                color = switchedColors.rightTextColor
             )
         }
 
