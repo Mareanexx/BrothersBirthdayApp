@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.data.model.GalleryItem
 import ru.mareanexx.brothersbirthdayapp.data.repo.SerGalleryDB
-import ru.mareanexx.brothersbirthdayapp.data.repo.findFavouriteImageByID
 import ru.mareanexx.brothersbirthdayapp.data.repo.findImageByID
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.imageDetails.CommentBlock
@@ -33,15 +32,9 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.components.imageDetails.RowWithL
 @Composable
 fun ImageDetailScreen(
     navController: NavController?,
-    imageId: Int,
-    favouriteOrAll: String
+    imageId: Int
 ) {
-    val image: GalleryItem = SerGalleryDB.run {
-        when(favouriteOrAll) {
-            "fav" -> this.findFavouriteImageByID(imageId)
-            else -> this.findImageByID(imageId)
-        }
-    } ?: SerGalleryDB.favourites[1]
+    val image: GalleryItem = SerGalleryDB.findImageByID(imageId)
 
     val context = LocalContext.current
     val imageBitmap = remember {
@@ -84,5 +77,5 @@ fun ImageDetailScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewImageDetailScreen() {
-    ImageDetailScreen(null, 1, "all")
+    ImageDetailScreen(null, 1)
 }

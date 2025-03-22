@@ -42,10 +42,9 @@ fun AppNavHost(navController: NavHostController) {
         ) { RobloxQuizScreen(navController) }
         composable("sergallery") { SerGalleryScreen(navController) }
 
-        composable("imageDetail/{favouriteOrAll}/{imageId}",
+        composable("imageDetail/{imageId}",
                 arguments = listOf(
-                    navArgument("imageId") { type = NavType.IntType },
-                    navArgument("favouriteOrAll") { type = NavType.StringType }
+                    navArgument("imageId") { type = NavType.IntType }
                 ),
             enterTransition = {
                 fadeIn() + scaleIn(initialScale = 0.1f)
@@ -53,8 +52,7 @@ fun AppNavHost(navController: NavHostController) {
         ) {
             navBackStackEntry: NavBackStackEntry ->
             val imageId = navBackStackEntry.arguments?.getInt("imageId") ?: return@composable
-            val favouriteOrAll = navBackStackEntry.arguments?.getString("favouriteOrAll") ?: return@composable
-            ImageDetailScreen(navController, imageId, favouriteOrAll)
+            ImageDetailScreen(navController, imageId)
         }
 
         composable("video_chat") { VideoChatScreen(navController) }

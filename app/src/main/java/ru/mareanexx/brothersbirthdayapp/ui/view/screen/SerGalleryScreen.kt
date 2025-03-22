@@ -86,7 +86,7 @@ fun SerGalleryGridCellItem(
         modifier = Modifier
             .clip(Shapes.small)
             .clickable {
-                navController?.navigate("imageDetail/all/${galleryItem.id}")
+                navController?.navigate("imageDetail/${galleryItem.id}")
             },
         contentScale = ContentScale.FillWidth
     )
