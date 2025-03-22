@@ -45,7 +45,7 @@ import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.data.model.RobloxImage
 import ru.mareanexx.brothersbirthdayapp.data.model.RobloxQuizQuestion
-import ru.mareanexx.brothersbirthdayapp.data.repo.RobloxQuizDatabase
+import ru.mareanexx.brothersbirthdayapp.data.repo.RobloxQuizDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
 import ru.mareanexx.brothersbirthdayapp.ui.theme.aroundDigitColor
@@ -69,12 +69,12 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.PreviousScreenB
 
 @Composable
 fun RobloxQuizScreen(navController: NavController?) {
-    RobloxQuizDatabase.questionRepository.shuffle()
-    RobloxQuizDatabase.imageRepository.shuffle()
+    RobloxQuizDB.questionRepository.shuffle()
+    RobloxQuizDB.imageRepository.shuffle()
 
     var numberOfQuestion by remember { mutableIntStateOf(0) }
-    var tempImage by remember { mutableStateOf<RobloxImage>(RobloxQuizDatabase.imageRepository[numberOfQuestion]) }
-    var tempQuestion by remember { mutableStateOf<RobloxQuizQuestion>(RobloxQuizDatabase.questionRepository[numberOfQuestion]) }
+    var tempImage by remember { mutableStateOf<RobloxImage>(RobloxQuizDB.imageRepository[numberOfQuestion]) }
+    var tempQuestion by remember { mutableStateOf<RobloxQuizQuestion>(RobloxQuizDB.questionRepository[numberOfQuestion]) }
     val chosenVariant = remember { mutableIntStateOf(-1) }
     var isCheckButtonEnabled by remember { mutableStateOf(false) }
     var numberOfMistakes by remember { mutableIntStateOf(0) } // Кол-во ошибок
@@ -91,8 +91,8 @@ fun RobloxQuizScreen(navController: NavController?) {
             CorrectAnswerDialog( onDismissRequest = {
                 openCorrectAnswerDialog.intValue = 0
                 numberOfQuestion++
-                tempImage = RobloxQuizDatabase.imageRepository[numberOfQuestion]
-                tempQuestion = RobloxQuizDatabase.questionRepository[numberOfQuestion]
+                tempImage = RobloxQuizDB.imageRepository[numberOfQuestion]
+                tempQuestion = RobloxQuizDB.questionRepository[numberOfQuestion]
                 chosenVariant.intValue = -1
             } )
         }

@@ -26,7 +26,7 @@ object GiftDB {
             priceInCoins = 367,
             level = "Hard",
             giftIcon = R.drawable.gift_3,
-            isReceived = false,
+            isReceived = true,
             secretCode = "КОНТРРЕВОЛЮЦИЯ"
         )
     )
