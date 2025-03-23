@@ -152,3 +152,6 @@ val exhibitAnnotationBackground = Color(0xFFF6F6F6)
 val exhibitAnnotaionCircle = Color(0xFF747474)
 
 val exhibitYearColor = Color(0xFF9C9C9C)
+
+// Quest Screen
+val questMainBackground = Color(0xFF221854)

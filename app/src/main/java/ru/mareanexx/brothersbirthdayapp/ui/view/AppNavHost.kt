@@ -24,6 +24,10 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.screen.MyCoinsScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.RobloxQuizScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.SerGalleryScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.VideoChatScreen
+import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.GuessTheCodeScreen
+import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.QuestLetterScreen
+import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.QuestScreen
+import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.SpiesScreen
 
 
 @Composable
@@ -76,5 +80,13 @@ fun AppNavHost(navController: NavHostController) {
             val itemId = backStackEntry.arguments?.getInt("itemId") ?: return@composable
             ExhibitScreen(navController, itemId)
         }
+
+        composable("quest") { QuestScreen(navController) }
+
+        composable("questLetter") { QuestLetterScreen(navController) }
+
+        composable("spies") { SpiesScreen(navController) }
+
+        composable("guessTheCode") { GuessTheCodeScreen(navController) }
     }
 }
