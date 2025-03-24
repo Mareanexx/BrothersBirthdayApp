@@ -155,3 +155,8 @@ val exhibitYearColor = Color(0xFF9C9C9C)
 
 // Quest Screen
 val questMainBackground = Color(0xFF221854)
+
+
+// Crossword Screen
+val crosswordTopBarMain = Color(0xFF1D7A27)
+val crosswordTopBarBackground = Color(0xFF73EBA7)

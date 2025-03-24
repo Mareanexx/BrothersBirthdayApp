@@ -14,6 +14,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import ru.mareanexx.brothersbirthdayapp.ui.view.screen.CrosswordScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.DirectChatScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.ExhibitScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.GamesScreen
@@ -34,7 +35,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.SpiesScreen
 fun AppNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "home",
+        startDestination = "crossword",
         enterTransition = { fadeIn(animationSpec = tween(0)) },
         exitTransition = { fadeOut(animationSpec = tween(0)) }
     ) {
@@ -88,5 +89,7 @@ fun AppNavHost(navController: NavHostController) {
         composable("spies") { SpiesScreen(navController) }
 
         composable("guessTheCode") { GuessTheCodeScreen(navController) }
+
+        composable("crossword") { CrosswordScreen(navController) }
     }
 }
