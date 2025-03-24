@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.data.model.Dialog
 import ru.mareanexx.brothersbirthdayapp.data.model.TextMessage
 import ru.mareanexx.brothersbirthdayapp.data.repo.DialogDB
@@ -43,7 +44,9 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.imageDetailCaption
 import ru.mareanexx.brothersbirthdayapp.ui.theme.imageDetailUsernameText
 import ru.mareanexx.brothersbirthdayapp.ui.theme.numberOfUnreadMessagesBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.spotColor
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.videoChat.TopBarVideoChat
+import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatMainViolet
+import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatTopBarBackground
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.TopAppBarInGames
 
 @Composable
 fun VideoChatScreen(navController: NavController?) {
@@ -51,7 +54,12 @@ fun VideoChatScreen(navController: NavController?) {
         modifier = Modifier
             .fillMaxSize()
     ) {
-        TopBarVideoChat(navController)
+        TopAppBarInGames(
+            navController = navController,
+            mainColor = videoChatMainViolet,
+            backgroundColor = videoChatTopBarBackground,
+            titleRes = R.string.video_chat
+        )
         DialogsLazyColumn(navController)
     }
 }

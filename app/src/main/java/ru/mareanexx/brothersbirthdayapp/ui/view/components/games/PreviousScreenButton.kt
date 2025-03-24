@@ -27,10 +27,6 @@ fun PreviousScreenButton(
                 color = backgroundColor,
                 shape = RoundedCornerShape(10.dp)
             ).clickable {
-//                navController?.navigate("games") {
-//                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
-//                    launchSingleTop = true
-//                }
                 navigateTo()
             },
         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
