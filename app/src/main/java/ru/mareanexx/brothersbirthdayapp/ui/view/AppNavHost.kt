@@ -35,7 +35,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.SpiesScreen
 fun AppNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "crossword",
+        startDestination = "home",
         enterTransition = { fadeIn(animationSpec = tween(0)) },
         exitTransition = { fadeOut(animationSpec = tween(0)) }
     ) {
