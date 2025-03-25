@@ -13,9 +13,9 @@ object DialogDB {
             personName = "Сеструха",
             avatarImagePath = "avatars/marianna.png",
             messages = listOf(
-                TextMessage("С др, БОРАТ!"),
                 VideoMessage("videos/mother.mp4"),
-                TextMessage("Мой любимый сынуля, поздравляю с днем варенья!")),
+                TextMessage("С др, БОРАТ!")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 5
         ),
@@ -25,7 +25,8 @@ object DialogDB {
             avatarImagePath = "avatars/mother.png",
             messages = listOf(
                 VideoMessage("videos/mother.mp4"),
-                TextMessage("TODO()")),
+                TextMessage("Мой любимый сынуля, поздравляю с днем варенья!")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 7
         ),
@@ -34,8 +35,9 @@ object DialogDB {
             personName = "Бабуся Маринуся",
             avatarImagePath = "avatars/granny2.png",
             messages = listOf(
-                VideoMessage("videos/granny.mp4"),
-                TextMessage("TODO()")),
+                VideoMessage("videos/granny.MP4"),
+                TextMessage("TODO()")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 8
         ),
@@ -45,7 +47,8 @@ object DialogDB {
             avatarImagePath = "avatars/granddad.png",
             messages = listOf(
                 VideoMessage("videos/grandad.mp4"),
-                TextMessage("TODO()")),
+                TextMessage("Ради тебя научился пользоваться ВКонтакте")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 15
         ),
@@ -54,8 +57,9 @@ object DialogDB {
             personName = "ПуТАНЬЧИК",
             avatarImagePath = "avatars/tanya.png",
             messages = listOf(
-                VideoMessage("videos/tatyana.mp4"),
-                TextMessage("Андрей не даст тебе виар пока")),
+                VideoMessage("videos/tatyana.MP4"),
+                TextMessage("Андрей не даст тебе виар пока")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 16
         ),
@@ -64,8 +68,9 @@ object DialogDB {
             personName = "Сударь всея Руси",
             avatarImagePath = "avatars/andrey.png",
             messages = listOf(
-                VideoMessage("videos/andrey.mp4"),
-                TextMessage("Я дам тебе виар..")),
+                VideoMessage("videos/andrey.MP4"),
+                TextMessage("Я дам тебе виар..")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 17
         ),
@@ -74,8 +79,9 @@ object DialogDB {
             personName = "Батя",
             avatarImagePath = "avatars/father.png",
             messages = listOf(
-                VideoMessage("videos/father.mp4"),
-                TextMessage("Это мой Сын! Это мой мальчик!")),
+                VideoMessage("videos/father.MP4"),
+                TextMessage("Это мой Сын! Это мой мальчик!")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 18
         ),
@@ -84,8 +90,9 @@ object DialogDB {
             personName = "Катенок",
             avatarImagePath = "avatars/kate.png",
             messages = listOf(
-                VideoMessage("videos/kate.mp4"),
-                TextMessage("Это мой Сын! Это мой мальчик!")),
+                TextMessage("Я выносила всех детей Пермиловских"),
+                VideoMessage("videos/kate.MP4")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 21
         ),
@@ -94,8 +101,9 @@ object DialogDB {
             personName = "Игорюша<3",
             avatarImagePath = "avatars/igor.png",
             messages = listOf(
-                VideoMessage("videos/igor.mp4"),
-                TextMessage("Дядя игорь теперь в SeregaGram")),
+                TextMessage("Дядя игорь теперь в SeregaGram"),
+                VideoMessage("videos/igor.MP4")
+            ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 22
         ),
