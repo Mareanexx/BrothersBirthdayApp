@@ -20,7 +20,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -33,10 +37,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.coroutines.launch
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.data.model.Dialog
 import ru.mareanexx.brothersbirthdayapp.data.model.TextMessage
 import ru.mareanexx.brothersbirthdayapp.data.repo.DialogDB
+import ru.mareanexx.brothersbirthdayapp.data.repo.GamesDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
 import ru.mareanexx.brothersbirthdayapp.ui.theme.ambientColor
@@ -47,18 +53,44 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.spotColor
 import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatMainViolet
 import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatTopBarBackground
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.TopAppBarInGames
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.dialogs.SuccessInFinishGameDialog
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
+import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
 
 @Composable
-fun VideoChatScreen(navController: NavController?) {
+fun VideoChatScreen(navController: NavController?, dataStore: DataStore) {
+    val coroutineScope = rememberCoroutineScope()
+    val isGameCompleted by dataStore.isChatCompleted.collectAsState(false)
+    val numberOfCoins by dataStore.numberOfCoins.collectAsState(0)
+    val checkCompleteAndShowDialog = remember { mutableIntStateOf(0) }
+
+    if (checkCompleteAndShowDialog.intValue == 1) {
+        if (!isGameCompleted) {
+            val reward = GamesDB.gameRepository[1].reward
+            SuccessInFinishGameDialog(
+                rewardSize = reward,
+                watchedOrCompleted = "посмотрел",
+            ) {
+                coroutineScope.launch {
+                    dataStore.saveNumberOfCoins(numberOfCoins + reward)
+                    dataStore.setGameCompleted(GameTypeSP.CHAT)
+                }
+                navController?.popBackStack()
+            }
+        } else {
+            navController?.popBackStack()
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         TopAppBarInGames(
-            navController = navController,
             mainColor = videoChatMainViolet,
             backgroundColor = videoChatTopBarBackground,
-            titleRes = R.string.video_chat
+            titleRes = R.string.video_chat,
+            onPreviousButtonClick = { checkCompleteAndShowDialog.intValue = 1 }
         )
         DialogsLazyColumn(navController)
     }
@@ -183,5 +215,5 @@ fun DialogItem(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewVideoChatScreen() {
-    VideoChatScreen(null)
+    VideoChatScreen(null, DataStore(LocalContext.current))
 }

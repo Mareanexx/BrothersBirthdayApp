@@ -29,10 +29,11 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.GuessTheCodeScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.QuestLetterScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.QuestScreen
 import ru.mareanexx.brothersbirthdayapp.ui.view.screen.quest.SpiesScreen
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 
 
 @Composable
-fun AppNavHost(navController: NavHostController) {
+fun AppNavHost(navController: NavHostController, dataStore: DataStore) {
     NavHost(
         navController = navController,
         startDestination = "home",
@@ -40,12 +41,14 @@ fun AppNavHost(navController: NavHostController) {
         exitTransition = { fadeOut(animationSpec = tween(0)) }
     ) {
         composable("home") { HomeScreen(navController) }
-        composable("games") { GamesScreen(navController) }
-        composable("my_coins") { MyCoinsScreen(navController) }
-        composable(
-            route = "roblox_quiz"
-        ) { RobloxQuizScreen(navController) }
-        composable("sergallery") { SerGalleryScreen(navController) }
+
+        composable("games") { GamesScreen(navController, dataStore) }
+
+        composable("my_coins") { MyCoinsScreen(navController, dataStore) }
+
+        composable("roblox_quiz") { RobloxQuizScreen(navController, dataStore) }
+
+        composable("sergallery") { SerGalleryScreen(navController, dataStore) }
 
         composable("imageDetail/{imageId}",
                 arguments = listOf(
@@ -60,7 +63,7 @@ fun AppNavHost(navController: NavHostController) {
             ImageDetailScreen(navController, imageId)
         }
 
-        composable("video_chat") { VideoChatScreen(navController) }
+        composable("video_chat") { VideoChatScreen(navController, dataStore) }
 
         composable("direct_chat/{chatId}",
             arguments = listOf(navArgument("chatId") { type = NavType.IntType} ),
@@ -71,7 +74,7 @@ fun AppNavHost(navController: NavHostController) {
             DirectChatScreen(navController, chatId)
         }
 
-        composable("museum") { MuseumScreen(navController) }
+        composable("museum") { MuseumScreen(navController, dataStore) }
 
         composable("exhibit/{itemId}",
             arguments = listOf(navArgument("itemId") { type = NavType.IntType } ),
@@ -82,7 +85,7 @@ fun AppNavHost(navController: NavHostController) {
             ExhibitScreen(navController, itemId)
         }
 
-        composable("quest") { QuestScreen(navController) }
+        composable("quest") { QuestScreen(navController, dataStore) }
 
         composable("questLetter") { QuestLetterScreen(navController) }
 
@@ -90,6 +93,6 @@ fun AppNavHost(navController: NavHostController) {
 
         composable("guessTheCode") { GuessTheCodeScreen(navController) }
 
-        composable("crossword") { CrosswordScreen(navController) }
+        composable("crossword") { CrosswordScreen(navController, dataStore) }
     }
 }

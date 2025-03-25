@@ -60,6 +60,9 @@ dependencies {
     implementation(libs.androidx.media3.session)
     implementation(libs.androidx.media3.ui)
 
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

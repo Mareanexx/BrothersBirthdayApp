@@ -18,9 +18,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,9 +41,12 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.gamesScreenTopPart
 import ru.mareanexx.brothersbirthdayapp.ui.theme.giftText
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.BottomNavBar
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.GameCard
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 
 @Composable
-fun GamesScreen(navController: NavController?) {
+fun GamesScreen(navController: NavController?, dataStore: DataStore) {
+    val numberOfCoins by dataStore.numberOfCoins.collectAsState(0)
+    
     Scaffold(
         bottomBar = { BottomNavBar(navController, 1) }
     ) { innerPadding ->
@@ -79,7 +85,7 @@ fun GamesScreen(navController: NavController?) {
                         contentDescription = null
                     )
                     Text(
-                        text = "125", // TODO()
+                        text = "$numberOfCoins",
                         color = giftText,
                         fontFamily = MontserratFamily,
                         fontWeight = FontWeight.Bold,
@@ -124,5 +130,5 @@ fun GamesScreen(navController: NavController?) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun PreviewGamesScreen() {
-    GamesScreen(null)
+    GamesScreen(null, DataStore(LocalContext.current))
 }

@@ -1,5 +1,6 @@
 package ru.mareanexx.brothersbirthdayapp.ui.view.components.myCoins
 
+import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -24,10 +25,14 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.data.model.Gift
 import ru.mareanexx.brothersbirthdayapp.data.repo.GiftDB.giftRepository
@@ -49,13 +55,18 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.greenBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.levelText
 import ru.mareanexx.brothersbirthdayapp.ui.theme.secretCodeBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.unlockedButtonBackground
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 
 @Composable
 fun GiftItem(
-    gift: Gift
+    gift: Gift,
+    dataStore: DataStore,
+    isReceived: Boolean
 ) {
-    val isReceived = remember { mutableStateOf(gift.isReceived) }
     val isExpanded = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val numberOfCoins by dataStore.numberOfCoins.collectAsState(initial = 0)
 
     Column(
         modifier = Modifier
@@ -76,8 +87,7 @@ fun GiftItem(
         ) {
             Row {
                 Image(
-                    modifier = Modifier
-                        .size(64.dp),
+                    modifier = Modifier.size(64.dp),
                     painter = painterResource(gift.giftIcon),
                     contentDescription = "Gift"
                 )
@@ -86,7 +96,7 @@ fun GiftItem(
                         .padding(bottom = 15.dp, start = 14.dp)
                         .fillMaxHeight(),
                     verticalArrangement = Arrangement.Center
-                ){
+                ) {
                     Text(
                         text = "${stringResource(R.string.gift)}${gift.giftNumber}",
                         fontFamily = MontserratFamily,
@@ -105,13 +115,21 @@ fun GiftItem(
                 }
             }
 
-            if (isReceived.value) { // Если подарок куплен, то будет блок с открытием секретного кода
+            if (isReceived) {
                 OpenBlock(Modifier.align(Alignment.Bottom), onOpenBottomPanel = {
                     isExpanded.value = !isExpanded.value
                 })
-            } else { // Если подарок не куплен, то будет блок с получением подарка
+            } else {
                 GetForBlock(gift, Modifier.align(Alignment.Bottom), onBuyGift = {
-                    isReceived.value = true
+                    if (numberOfCoins >= gift.priceInCoins) {
+                        coroutineScope.launch {
+                            dataStore.saveNumberOfCoins(numberOfCoins - gift.priceInCoins)
+                            dataStore.setGiftReceived(gift.giftTypeSP)
+                        }
+                        isExpanded.value = true
+                    } else {
+                        Toast.makeText(context, "Недостаточно монет!", Toast.LENGTH_SHORT).show()
+                    }
                 })
             }
         }
@@ -275,8 +293,8 @@ fun NumberOfCoinsBlock(
     }
 }
 
-@Preview()
+@Preview
 @Composable
 fun PreviewGiftItem() {
-    GiftItem(giftRepository[0])
+    GiftItem(giftRepository[0], DataStore(LocalContext.current), isReceived = false)
 }

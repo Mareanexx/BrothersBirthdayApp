@@ -19,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
@@ -31,8 +30,8 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.PreviousScreenB
 
 @Composable
 fun TopBarMuseum(
-    navController: NavController?,
-    numberOfDoor: MutableIntState
+    numberOfDoor: MutableIntState,
+    onPreviousButtonClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -51,9 +50,7 @@ fun TopBarMuseum(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(70.dp)
         ) {
-            PreviousScreenButton(museumTopBarPrimary, Color.White, navigateTo = {
-                navController?.popBackStack()
-            })
+            PreviousScreenButton(museumTopBarPrimary, Color.White, navigateTo = onPreviousButtonClick)
             Text(
                 modifier = Modifier.padding(start = 35.dp),
                 text = stringResource(R.string.museum),

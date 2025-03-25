@@ -25,15 +25,18 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,9 +45,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.coroutines.launch
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.data.model.RobloxImage
 import ru.mareanexx.brothersbirthdayapp.data.model.RobloxQuizQuestion
+import ru.mareanexx.brothersbirthdayapp.data.repo.GamesDB
 import ru.mareanexx.brothersbirthdayapp.data.repo.RobloxQuizDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
@@ -61,14 +66,17 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.robloxQuizMainText
 import ru.mareanexx.brothersbirthdayapp.ui.theme.robloxTopMenuBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.yellowAnswerButtonBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.yellowAnswerText
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.dialogs.SuccessInFinishGameDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.CorrectAnswerDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.EndOfGameDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.IncorrectAnswerDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.OneHeartItem
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.PreviousScreenButton
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
+import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
 
 @Composable
-fun RobloxQuizScreen(navController: NavController?) {
+fun RobloxQuizScreen(navController: NavController?, dataStore: DataStore) {
     RobloxQuizDB.questionRepository.shuffle()
     RobloxQuizDB.imageRepository.shuffle()
 
@@ -78,8 +86,37 @@ fun RobloxQuizScreen(navController: NavController?) {
     val chosenVariant = remember { mutableIntStateOf(-1) }
     var isCheckButtonEnabled by remember { mutableStateOf(false) }
     var numberOfMistakes by remember { mutableIntStateOf(0) } // Кол-во ошибок
+    val numberOfRightAnswers = remember { mutableIntStateOf(0) }
 
     val openCorrectAnswerDialog = remember { mutableIntStateOf(0) } // 0 - закрыты, 1 - верный ответ, 2 - неверный, 3 - конец игры
+
+    val coroutineScope = rememberCoroutineScope()
+    val isGameCompleted by dataStore.isRobloxGameCompleted.collectAsState(false)
+    val numberOfCoins by dataStore.numberOfCoins.collectAsState(0)
+
+    if (numberOfRightAnswers.intValue == 10) {
+        if (!isGameCompleted) {
+            val reward = GamesDB.gameRepository[0].reward
+            SuccessInFinishGameDialog(
+                rewardSize = reward,
+                watchedOrCompleted = "прошел",
+            ) {
+                coroutineScope.launch {
+                    dataStore.saveNumberOfCoins(numberOfCoins + reward)
+                    dataStore.setGameCompleted(GameTypeSP.ROBLOX)
+                }
+                navController?.navigate(route = "games") {
+                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                    launchSingleTop = true
+                }
+            }
+        } else {
+            navController?.navigate(route = "games") {
+                popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                launchSingleTop = true
+            }
+        }
+    }
 
     if (numberOfMistakes == 3) {
         openCorrectAnswerDialog.intValue = 3
@@ -90,8 +127,9 @@ fun RobloxQuizScreen(navController: NavController?) {
         1 -> {
             CorrectAnswerDialog( onDismissRequest = {
                 openCorrectAnswerDialog.intValue = 0
+                numberOfRightAnswers.intValue += 1
                 numberOfQuestion++
-                tempImage = RobloxQuizDB.imageRepository[numberOfQuestion]
+                tempImage = RobloxQuizDB.imageRepository[ if(numberOfQuestion < 10) numberOfQuestion else 0 ]
                 tempQuestion = RobloxQuizDB.questionRepository[numberOfQuestion]
                 chosenVariant.intValue = -1
             } )
@@ -376,5 +414,5 @@ fun NumberRowElement(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewRobloxQuizScreen() {
-    RobloxQuizScreen(null)
+    RobloxQuizScreen(null, DataStore(LocalContext.current))
 }

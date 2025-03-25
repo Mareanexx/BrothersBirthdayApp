@@ -34,7 +34,7 @@ object GamesDB {
         GameCard(
             imageRes = R.drawable.roblox,
             routePath = "roblox_quiz",
-            reward = 100,
+            reward = 195,
             name = "Roblox Quiz",
             caption = "Answer some questions about Roblox",
             backgroundColor = robloxCardBackground,
@@ -44,7 +44,7 @@ object GamesDB {
         GameCard(
             imageRes = R.drawable.videochat,
             routePath = "video_chat",
-            reward = 120,
+            reward = 63,
             name = "Video Chat",
             caption = "Watch video greetings from your relatives",
             backgroundColor = videoChatBackground,
@@ -56,7 +56,7 @@ object GamesDB {
         GameCard(
             imageRes = R.drawable.quest,
             routePath = "quest",
-            reward = 100,
+            reward = 301,
             name = "Quest",
             caption = "Complete the quest in English and defeat the villain",
             backgroundColor = questBackground,
@@ -68,7 +68,7 @@ object GamesDB {
         GameCard(
             imageRes = R.drawable.crossword,
             routePath = "crossword",
-            reward = 100,
+            reward = 354,
             name = "Crossword",
             caption = "Solve the crossword with funny questions about our family",
             backgroundColor = crosswordBackground,
@@ -80,7 +80,7 @@ object GamesDB {
         GameCard(
             imageRes = R.drawable.museum,
             routePath = "museum",
-            reward = 100,
+            reward = 49,
             name = "Museum",
             caption = "Choose a door and explore the museum exhibits",
             backgroundColor = greetingBackground,
@@ -88,11 +88,10 @@ object GamesDB {
             captionTextColor = greetingCaption,
             buttonColor = greetingButton
         ),
-
         GameCard(
             imageRes = R.drawable.sergallery,
             routePath = "sergallery",
-            reward = 100,
+            reward = 38,
             name = "SerGallery",
             caption = "See your photos of all time with stupid captions",
             backgroundColor = galleryBackground,

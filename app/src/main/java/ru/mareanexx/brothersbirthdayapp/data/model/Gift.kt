@@ -1,6 +1,7 @@
 package ru.mareanexx.brothersbirthdayapp.data.model
 
 import androidx.annotation.DrawableRes
+import ru.mareanexx.brothersbirthdayapp.utils.GiftTypeSP
 
 data class Gift(
     val giftNumber: Int,
@@ -8,5 +9,6 @@ data class Gift(
     val level: String,
     @DrawableRes val giftIcon: Int,
     var isReceived: Boolean,
-    val secretCode: String
+    val secretCode: String,
+    val giftTypeSP: GiftTypeSP
 )

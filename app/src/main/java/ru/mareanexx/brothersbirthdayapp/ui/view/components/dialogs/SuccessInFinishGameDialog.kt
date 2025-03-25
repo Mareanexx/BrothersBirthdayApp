@@ -35,12 +35,11 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.components.myCoins.NumberOfCoins
 fun SuccessInFinishGameDialog(
     rewardSize: Int,
     watchedOrCompleted: String, // "прошел" или "посмотрел"
-    onDismiss: () -> Unit,
     onGetCoinsClick: () -> Unit
 ) {
     Dialog(
         // properties = DialogProperties(usePlatformDefaultWidth = false),
-        onDismissRequest = onDismiss
+        onDismissRequest = onGetCoinsClick
     ) {
         Column(
             modifier = Modifier
@@ -114,5 +113,5 @@ fun GetCoinsButton(
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 fun PreviewSuccessInFinishGameDialog() {
-    SuccessInFinishGameDialog(125, "посмотрел", onDismiss = {}) { }
+    SuccessInFinishGameDialog(125, "посмотрел") { }
 }

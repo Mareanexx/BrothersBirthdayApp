@@ -24,12 +24,15 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -39,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
-import ru.mareanexx.brothersbirthdayapp.data.model.Gift
 import ru.mareanexx.brothersbirthdayapp.data.repo.GiftDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
@@ -55,10 +57,25 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.unlockedButtonBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.yellowCoinsBackground
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.BottomNavBar
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.myCoins.GiftItem
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
+import ru.mareanexx.brothersbirthdayapp.utils.GiftTypeSP
 
 @Composable
-fun MyCoinsScreen(navController: NavController?) {
+fun MyCoinsScreen(navController: NavController?, dataStore: DataStore) {
     val isLeftButtonActive = remember { mutableStateOf(true) }
+    val isGift1Received by dataStore.isGift1Received.collectAsState(false)
+    val isGift2Received by dataStore.isGift2Received.collectAsState(false)
+    val isGift3Received by dataStore.isGift3Received.collectAsState(false)
+
+    fun getState(giftTypeSP: GiftTypeSP): Boolean {
+        return when(giftTypeSP) {
+            GiftTypeSP.GIFT1 -> isGift1Received
+            GiftTypeSP.GIFT2 -> isGift2Received
+            GiftTypeSP.GIFT3 -> isGift3Received
+        }
+    }
+    val giftStatuses = listOf(getState(GiftTypeSP.GIFT1), getState(GiftTypeSP.GIFT2), getState(GiftTypeSP.GIFT3))
+
 
     Box(
         modifier = Modifier
@@ -69,7 +86,7 @@ fun MyCoinsScreen(navController: NavController?) {
             modifier = Modifier
                 .padding(horizontal = 20.dp)
         ) {
-            HeaderMyCoinsWithHeroImage()
+            HeaderMyCoinsWithHeroImage(dataStore)
 
             HorizontalDivider(
                 modifier = Modifier.padding(vertical = 17.dp),
@@ -77,7 +94,9 @@ fun MyCoinsScreen(navController: NavController?) {
             )
 
             Text(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 17.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 17.dp),
                 textAlign = TextAlign.Center,
                 text = stringResource(R.string.coins_for_rewards),
                 fontFamily = MontserratFamily,
@@ -98,21 +117,20 @@ fun MyCoinsScreen(navController: NavController?) {
                 modifier = Modifier.padding(top = 15.dp, bottom = 100.dp),
                 verticalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                if (isLeftButtonActive.value) {
-                    items(GiftDB.giftRepository) {
-                        gift: Gift -> GiftItem(gift)
-                    }
+                val filteredGifts = if (isLeftButtonActive.value) {
+                    GiftDB.giftRepository
                 } else {
-                    items(GiftDB.giftRepository.filter { it.isReceived }) {
-                        gift: Gift -> GiftItem(gift)
-                    }
+                    GiftDB.giftRepository.filterIndexed { index, _ -> giftStatuses[index] }
+                }
+
+                items(filteredGifts) { gift ->
+                    GiftItem(gift, dataStore, isReceived = getState(gift.giftTypeSP))
                 }
             }
         }
-        BottomNavBar(navController,3, modifier = Modifier.align(Alignment.BottomCenter))
+        BottomNavBar(navController, 3, modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
-
 
 
 @Composable
@@ -136,7 +154,8 @@ fun SwitcherAllGiftsUnlocked(
 
     Row (
         modifier = Modifier
-            .height(42.dp).fillMaxWidth()
+            .height(42.dp)
+            .fillMaxWidth()
             .background(color = unlockedButtonBackground, shape = Shapes.extraLarge),
         horizontalArrangement = Arrangement.Center
     ) {
@@ -176,7 +195,9 @@ fun SwitcherAllGiftsUnlocked(
 
 
 @Composable
-fun HeaderMyCoinsWithHeroImage() {
+fun HeaderMyCoinsWithHeroImage(dataStore: DataStore) {
+    val numberOfCoins by dataStore.numberOfCoins.collectAsState(initial = 0)
+
     Row(
         modifier = Modifier
             .systemBarsPadding()
@@ -193,12 +214,12 @@ fun HeaderMyCoinsWithHeroImage() {
         )
 
         Column {
-            Text( // SEREGA text
+            Text(
                 text = stringResource(R.string.hero_name),
                 fontFamily = MontserratFamily,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 32.sp
-            ) // #kvadrobandit text
+            )
             Text(
                 modifier = Modifier
                     .background(color = hashTag, shape = Shapes.extraLarge)
@@ -220,7 +241,7 @@ fun HeaderMyCoinsWithHeroImage() {
                     caption = R.string.coins
                 ) {
                     Text(
-                        text = "1244",
+                        text = "$numberOfCoins",
                         fontFamily = MontserratFamily,
                         fontWeight = FontWeight.ExtraBold,
                         color = numberOfCoinsText,
@@ -263,9 +284,10 @@ fun CoinsAndGamesProgressBlock(
         modifier = Modifier
             .size(104.dp)
             .background(
-            color = backgroundColor,
-            shape = Shapes.large
-        ).padding(horizontal = 12.dp, vertical = 8.dp),
+                color = backgroundColor,
+                shape = Shapes.large
+            )
+            .padding(horizontal = 12.dp, vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -288,5 +310,5 @@ fun CoinsAndGamesProgressBlock(
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun PreviewMyCoinsScreen() {
-    MyCoinsScreen(null)
+    MyCoinsScreen(null, DataStore(LocalContext.current))
 }

@@ -19,9 +19,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +33,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -46,6 +49,7 @@ import ru.mareanexx.brothersbirthdayapp.data.model.crossword.Cell
 import ru.mareanexx.brothersbirthdayapp.data.model.crossword.Crossword
 import ru.mareanexx.brothersbirthdayapp.data.model.crossword.Direction
 import ru.mareanexx.brothersbirthdayapp.data.model.crossword.Word
+import ru.mareanexx.brothersbirthdayapp.data.repo.GamesDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.crosswordTopBarBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.crosswordTopBarMain
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.TopAppBarInGames
@@ -54,16 +58,24 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.AreYouSureD
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates.ALL_CLOSED
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates.OPENED_CORRECT
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates.OPENED_INCORRECT
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates.OPENED_SUCCESS
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates.OPENED_SURE
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordKeyboard
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.SmallTextNumberInCorner
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.TasksLazyColumn
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.dialogs.SuccessInFinishGameDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.CorrectAnswerDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.IncorrectAnswerDialog
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
+import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
 
 
 @Composable
-fun CrosswordScreen(navController: NavController?) {
+fun CrosswordScreen(navController: NavController?, dataStore: DataStore) {
+    val coroutineScope = rememberCoroutineScope()
+    val isGameCompleted by dataStore.isCrosswordCompleted.collectAsState(false)
+    val numberOfCoins by dataStore.numberOfCoins.collectAsState(initial = 0)
+
     val crosswordObject = Crossword
     val horizontalScrollState = rememberScrollState(200)
     val verticalScrollState = rememberScrollState(200)
@@ -87,10 +99,27 @@ fun CrosswordScreen(navController: NavController?) {
         }
         OPENED_CORRECT -> {
             CorrectAnswerDialog {
-                openDialog.value = ALL_CLOSED
-                // TODO() - здесь реализовать проверку на дать деньги или не дать
-                navController?.popBackStack()
+                if (isGameCompleted) {
+                    navController?.popBackStack()
+                } else {
+                    openDialog.value = OPENED_SUCCESS
+                }
             }
+        }
+        OPENED_SUCCESS -> {
+            val reward = GamesDB.gameRepository[3].reward
+            SuccessInFinishGameDialog(
+                rewardSize = reward,
+                watchedOrCompleted = "прошел",
+                onGetCoinsClick = {
+                    openDialog.value = ALL_CLOSED
+                    coroutineScope.launch {
+                        dataStore.saveNumberOfCoins(numberOfCoins + reward)
+                        dataStore.setGameCompleted(GameTypeSP.CROSSWORD)
+                    }
+                    navController?.popBackStack()
+                }
+            )
         }
         OPENED_INCORRECT -> {
             IncorrectAnswerDialog {
@@ -106,10 +135,10 @@ fun CrosswordScreen(navController: NavController?) {
             .background(color = Color.White)
     ) {
         TopAppBarInGames(
-            navController = navController,
             mainColor = crosswordTopBarMain,
             backgroundColor = crosswordTopBarBackground,
-            titleRes = R.string.crossword
+            titleRes = R.string.crossword,
+            onPreviousButtonClick = { navController?.popBackStack() }
         )
 
         Column(
@@ -239,5 +268,5 @@ fun CrosswordNotAvailableCell() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCrosswordScreen() {
-    CrosswordScreen(null)
+    CrosswordScreen(null, DataStore(LocalContext.current))
 }

@@ -70,7 +70,7 @@ fun GameCard(
                     lineHeight = 16.sp,
                     color = rewardColor
                 )
-                RewardOfCoinsBlock()
+                RewardOfCoinsBlock(gameCard)
             }
         }
         Text(
@@ -118,7 +118,7 @@ fun GameCard(
 }
 
 @Composable
-fun RewardOfCoinsBlock() {
+fun RewardOfCoinsBlock(gameCard: GameCard) {
     Row(
         modifier = Modifier.background(
             color = rewardBackground, shape = RoundedCornerShape(10.dp)
@@ -132,7 +132,7 @@ fun RewardOfCoinsBlock() {
             contentDescription = "Reward"
         )
         Text(
-            text = "125",
+            text = "${gameCard.reward}",
             fontFamily = MontserratFamily,
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,

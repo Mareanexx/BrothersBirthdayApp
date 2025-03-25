@@ -19,7 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatMainViolet
@@ -28,11 +27,11 @@ import ru.mareanexx.brothersbirthdayapp.ui.view.components.games.PreviousScreenB
 
 @Composable
 fun TopAppBarInGames(
-    navController: NavController?,
     mainColor: Color,
     backgroundColor: Color,
     arrowColor: Color = Color.White,
-    @StringRes titleRes: Int
+    @StringRes titleRes: Int,
+    onPreviousButtonClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -51,12 +50,7 @@ fun TopAppBarInGames(
                 .padding(horizontal = 15.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            PreviousScreenButton(mainColor, iconColor = arrowColor, navigateTo = {
-                navController?.navigate("games") {
-                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
-                    launchSingleTop = true
-                }
-            })
+            PreviousScreenButton(mainColor, iconColor = arrowColor, navigateTo = onPreviousButtonClick)
             Text(
                 modifier = Modifier.padding(start = 87.dp),
                 text = stringResource(titleRes),
@@ -74,9 +68,8 @@ fun TopAppBarInGames(
 @Composable
 fun PreviewTopAppBarInGames() {
     TopAppBarInGames(
-        navController = null,
         mainColor = videoChatMainViolet,
         backgroundColor = videoChatTopBarBackground,
         titleRes = R.string.video_chat
-    )
+    ) {}
 }

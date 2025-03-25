@@ -34,7 +34,7 @@ object DialogDB {
             personName = "Бабуся Маринуся",
             avatarImagePath = "avatars/granny2.png",
             messages = listOf(
-                VideoMessage("videos/mother.mp4"),
+                VideoMessage("videos/granny.mp4"),
                 TextMessage("TODO()")),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 8
@@ -44,7 +44,7 @@ object DialogDB {
             personName = "Деда Андрей",
             avatarImagePath = "avatars/granddad.png",
             messages = listOf(
-                VideoMessage("videos/mother.mp4"),
+                VideoMessage("videos/grandad.mp4"),
                 TextMessage("TODO()")),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 15
@@ -54,7 +54,7 @@ object DialogDB {
             personName = "ПуТАНЬЧИК",
             avatarImagePath = "avatars/tanya.png",
             messages = listOf(
-                VideoMessage("videos/mother.mp4"),
+                VideoMessage("videos/tatyana.mp4"),
                 TextMessage("Андрей не даст тебе виар пока")),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 16
@@ -64,7 +64,7 @@ object DialogDB {
             personName = "Сударь всея Руси",
             avatarImagePath = "avatars/andrey.png",
             messages = listOf(
-                VideoMessage("videos/mother.mp4"),
+                VideoMessage("videos/andrey.mp4"),
                 TextMessage("Я дам тебе виар..")),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 17
@@ -74,7 +74,7 @@ object DialogDB {
             personName = "Батя",
             avatarImagePath = "avatars/father.png",
             messages = listOf(
-                VideoMessage("videos/mother.mp4"),
+                VideoMessage("videos/father.mp4"),
                 TextMessage("Это мой Сын! Это мой мальчик!")),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 18
@@ -84,7 +84,7 @@ object DialogDB {
             personName = "Катенок",
             avatarImagePath = "avatars/kate.png",
             messages = listOf(
-                VideoMessage("videos/mother.mp4"),
+                VideoMessage("videos/kate.mp4"),
                 TextMessage("Это мой Сын! Это мой мальчик!")),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 21
@@ -94,7 +94,7 @@ object DialogDB {
             personName = "Игорюша<3",
             avatarImagePath = "avatars/igor.png",
             messages = listOf(
-                VideoMessage("videos/mother.mp4"),
+                VideoMessage("videos/igor.mp4"),
                 TextMessage("Дядя игорь теперь в SeregaGram")),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 22

@@ -20,8 +20,11 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,20 +35,50 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import kotlinx.coroutines.launch
 import ru.mareanexx.brothersbirthdayapp.R
 import ru.mareanexx.brothersbirthdayapp.data.model.MuseumExhibit
+import ru.mareanexx.brothersbirthdayapp.data.repo.GamesDB
 import ru.mareanexx.brothersbirthdayapp.data.repo.MuseumExhibitDB
 import ru.mareanexx.brothersbirthdayapp.ui.theme.museumMainBackground
+import ru.mareanexx.brothersbirthdayapp.ui.view.components.dialogs.SuccessInFinishGameDialog
 import ru.mareanexx.brothersbirthdayapp.ui.view.components.museum.TopBarMuseum
+import ru.mareanexx.brothersbirthdayapp.utils.DataStore
+import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
 
 @Composable
-fun MuseumScreen(navController: NavController?) {
+fun MuseumScreen(navController: NavController?, dataStore: DataStore) {
     val doorNumber = remember { mutableIntStateOf(0) }
+
+    val coroutineScope = rememberCoroutineScope()
+    val isGameCompleted by dataStore.isMuseumCompleted.collectAsState(false)
+    val numberOfCoins by dataStore.numberOfCoins.collectAsState(0)
+    val checkCompleteAndShowDialog = remember { mutableIntStateOf(0) }
+
+    if (checkCompleteAndShowDialog.intValue == 1) {
+        if (!isGameCompleted) {
+            val reward = GamesDB.gameRepository[4].reward
+            SuccessInFinishGameDialog(
+                rewardSize = reward,
+                watchedOrCompleted = "посмотрел",
+            ) {
+                coroutineScope.launch {
+                    dataStore.saveNumberOfCoins(numberOfCoins + reward)
+                    dataStore.setGameCompleted(GameTypeSP.MUSEUM)
+                }
+                navController?.popBackStack()
+            }
+        } else {
+            navController?.popBackStack()
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxSize().background(color = museumMainBackground)
     ) {
-        TopBarMuseum(navController, doorNumber)
+        TopBarMuseum(doorNumber, onPreviousButtonClick = {
+            checkCompleteAndShowDialog.intValue = 1
+        })
         Image(
             modifier = Modifier.width(220.dp).align(Alignment.CenterHorizontally),
             painter = painterResource(R.drawable.table_open_the_door),
@@ -128,5 +161,5 @@ fun DoorPagerItem(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewMuseumScreen() {
-    MuseumScreen(null)
+    MuseumScreen(null, dataStore = DataStore(LocalContext.current))
 }

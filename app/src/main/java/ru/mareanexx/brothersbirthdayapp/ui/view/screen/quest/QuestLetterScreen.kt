@@ -186,14 +186,14 @@ fun LetterBlock(
 
     RowWithTextField(
         textBefore = "If you are ",
-        textAfter = ", and who is telling the truth.",
+        textAfter = " enough, you WILL find them.",
         inputText = smartTextField
     )
 
     RowWithTextField(
         paddingModifier = Modifier.padding(bottom = 10.dp),
         textBefore = "Check who is ",
-        textAfter = " enough, you WILL find them.",
+        textAfter = ", and who is telling the truth.",
         inputText = lyingTextField
     )
 
