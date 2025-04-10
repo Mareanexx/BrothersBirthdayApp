@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -35,13 +35,21 @@ fun HomeScreen(navController: NavController?) {
     val isMusicPlaying = remember { mutableStateOf(false) }
     val context = LocalContext.current
 
+    val mediaPlayer = remember {
+        MediaPlayer.create(context, R.raw.music).apply {
+            isLooping = true
+        }
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer.release()
+        }
+    }
+
     if (isFAQdialogOpened.value) {
         WhatToDoDialog { isFAQdialogOpened.value = false }
     }
-
-    val mediaPlayer by remember { mutableStateOf(MediaPlayer.create(context, R.raw.music).apply {
-        isLooping = true
-    })}
 
     Box(
         modifier = Modifier

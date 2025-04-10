@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -60,6 +61,12 @@ fun VideoBubble(
 
     var isScaled by remember { mutableStateOf(false) }
     var isPlaying by remember { mutableStateOf(true) }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            exoPlayer.release()
+        }
+    }
 
     val size by animateDpAsState(targetValue = if (isScaled) 380.dp else 240.dp, label = "")
 
