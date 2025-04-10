@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,7 +58,7 @@ fun AllQuestionsAndCheckButton(
             fontFamily = MontserratFamily
         )
         Button(
-            colors = ButtonDefaults.buttonColors(containerColor = Black),
+            colors = ButtonDefaults.buttonColors(containerColor = Black, contentColor = White),
             modifier = Modifier.height(30.dp),
             onClick = onCheckAnswers,
             contentPadding = PaddingValues(horizontal = 10.dp)

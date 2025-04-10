@@ -76,7 +76,8 @@ fun SmallGrayButton(
 ) {
     Button(
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF8D8D8D)
+            containerColor = Color(0xFF8D8D8D),
+            contentColor = Color.White
         ),
         onClick = onClick
     ) {

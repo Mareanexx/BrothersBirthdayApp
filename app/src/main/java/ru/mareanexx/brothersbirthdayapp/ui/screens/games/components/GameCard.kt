@@ -97,7 +97,8 @@ fun GameCard(
             modifier = Modifier.fillMaxWidth().padding(horizontal = 15.dp),
             onClick = onPlayClick,
             colors = ButtonDefaults.buttonColors(
-                containerColor = gameCard.buttonColor
+                containerColor = gameCard.buttonColor,
+                contentColor = Color.White
             ),
             contentPadding = PaddingValues(end = 8.dp, start = 12.dp)
         ) {
