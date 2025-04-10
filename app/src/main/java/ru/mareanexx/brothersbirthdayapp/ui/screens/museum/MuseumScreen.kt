@@ -28,6 +28,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.screens.museum.components.TopBarMuseu
 import ru.mareanexx.brothersbirthdayapp.ui.theme.museumMainBackground
 import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
+import ru.mareanexx.brothersbirthdayapp.utils.helperNavBack
 
 @Composable
 fun MuseumScreen(navController: NavController?, dataStore: DataStore) {
@@ -49,10 +50,10 @@ fun MuseumScreen(navController: NavController?, dataStore: DataStore) {
                     dataStore.saveNumberOfCoins(numberOfCoins + reward)
                     dataStore.setGameCompleted(GameTypeSP.MUSEUM)
                 }
-                navController?.popBackStack()
+                navController.helperNavBack()
             }
         } else {
-            navController?.popBackStack()
+            navController.helperNavBack()
         }
     }
 

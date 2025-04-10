@@ -30,6 +30,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.screens.quest.components.StoryAnnotat
 import ru.mareanexx.brothersbirthdayapp.ui.theme.questMainBackground
 import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
+import ru.mareanexx.brothersbirthdayapp.utils.helperNavBack
 
 @Composable
 fun QuestScreen(navController: NavController?, dataStore: DataStore) {
@@ -68,11 +69,11 @@ fun QuestScreen(navController: NavController?, dataStore: DataStore) {
                     dataStore.setGameCompleted(GameTypeSP.QUEST)
                 }
                 questTaskDB.tempTaskNumber = 0
-                navController?.popBackStack()
+                navController.helperNavBack()
             }
         } else {
             questTaskDB.tempTaskNumber = 0
-            navController?.popBackStack()
+            navController.helperNavBack()
         }
     }
 

@@ -40,6 +40,7 @@ fun DoorPager(
         0,
         pageCount = { museumRepo.size }
     )
+    doorNumber.intValue = pagerState.currentPage
 
     HorizontalPager(
         contentPadding = PaddingValues(top = 50.dp),
@@ -47,7 +48,7 @@ fun DoorPager(
     ) {
             pageNumber: Int ->
         val museumExhibit = museumRepo[pageNumber]
-        DoorPagerItem(museumExhibit, doorNumber, goToConcreteExhibit = {
+        DoorPagerItem(museumExhibit, goToConcreteExhibit = {
             navController?.navigate("exhibit/${museumExhibit.id}")
         })
     }
@@ -56,15 +57,12 @@ fun DoorPager(
 @Composable
 fun DoorPagerItem(
     museumExhibit: MuseumExhibit,
-    doorNumber: MutableIntState,
     goToConcreteExhibit: () -> Unit
 ) {
     val context = LocalContext.current
     val doorImageBitmap = remember {
         BitmapFactory.decodeStream(context.assets.open(museumExhibit.doorImagePath)).asImageBitmap()
     }
-
-    doorNumber.intValue = museumExhibit.id - 1
 
     Box(
         modifier = Modifier.fillMaxWidth(),

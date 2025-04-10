@@ -48,6 +48,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.crosswordTopBarBackground
 import ru.mareanexx.brothersbirthdayapp.ui.theme.crosswordTopBarMain
 import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
+import ru.mareanexx.brothersbirthdayapp.utils.helperNavBack
 
 
 @Composable
@@ -97,7 +98,7 @@ fun CrosswordScreen(navController: NavController?, dataStore: DataStore) {
                         dataStore.saveNumberOfCoins(numberOfCoins + reward)
                         dataStore.setGameCompleted(GameTypeSP.CROSSWORD)
                     }
-                    navController?.popBackStack()
+                    navController.helperNavBack()
                 }
             )
         }

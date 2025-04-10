@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.mareanexx.brothersbirthdayapp.ui.screens.quest.SmallGrayButton
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 
 @Composable

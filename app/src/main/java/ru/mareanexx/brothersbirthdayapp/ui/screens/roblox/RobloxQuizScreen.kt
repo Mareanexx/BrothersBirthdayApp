@@ -47,11 +47,15 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.disabledCheckButton
 import ru.mareanexx.brothersbirthdayapp.ui.theme.greenAnswerText
 import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
+import ru.mareanexx.brothersbirthdayapp.utils.helperNavBack
 
 @Composable
 fun RobloxQuizScreen(navController: NavController?, dataStore: DataStore) {
-    RobloxQuizDB.questionRepository.shuffle()
-    RobloxQuizDB.imageRepository.shuffle()
+    if (RobloxQuizDB.firstAccess) {
+        RobloxQuizDB.questionRepository.shuffle()
+        RobloxQuizDB.imageRepository.shuffle()
+        RobloxQuizDB.firstAccess = false
+    }
 
     var numberOfQuestion by remember { mutableIntStateOf(0) }
     var tempImage by remember { mutableStateOf<RobloxImage>(RobloxQuizDB.imageRepository[numberOfQuestion]) }
@@ -78,17 +82,12 @@ fun RobloxQuizScreen(navController: NavController?, dataStore: DataStore) {
                     dataStore.saveNumberOfCoins(numberOfCoins + reward)
                     dataStore.setGameCompleted(GameTypeSP.ROBLOX)
                 }
-                navController?.navigate(route = "games") {
-                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
-                    launchSingleTop = true
-                }
+                navController.helperNavBack()
             }
         } else {
-            navController?.navigate(route = "games") {
-                popUpTo(navController.graph.startDestinationId) { inclusive = true }
-                launchSingleTop = true
-            }
+            navController.helperNavBack()
         }
+        RobloxQuizDB.firstAccess = true
     }
 
     if (numberOfMistakes == 3) {
@@ -105,22 +104,25 @@ fun RobloxQuizScreen(navController: NavController?, dataStore: DataStore) {
                 tempImage = RobloxQuizDB.imageRepository[ if(numberOfQuestion < 10) numberOfQuestion else 0 ]
                 tempQuestion = RobloxQuizDB.questionRepository[numberOfQuestion]
                 chosenVariant.intValue = -1
-            } )
+            })
         }
         2 -> {
             IncorrectAnswerDialog( onDismissRequest = {
                 openCorrectAnswerDialog.intValue = 0
                 numberOfMistakes++
                 chosenVariant.intValue = -1
-            } )
+            })
         }
-        3 -> { EndOfGameDialog( onDismissRequest = {
-            openCorrectAnswerDialog.intValue = 0
-            navController?.navigate(route = "games") {
-                popUpTo(navController.graph.startDestinationId) { inclusive = true }
-                launchSingleTop = true
-            }
-        } ) }
+        3 -> {
+            EndOfGameDialog( onDismissRequest = {
+                openCorrectAnswerDialog.intValue = 0
+                navController?.navigate(route = "games") {
+                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                    launchSingleTop = true
+                }
+            })
+            RobloxQuizDB.firstAccess = true
+        }
     }
 
     Column(

@@ -22,6 +22,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatMainViolet
 import ru.mareanexx.brothersbirthdayapp.ui.theme.videoChatTopBarBackground
 import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
+import ru.mareanexx.brothersbirthdayapp.utils.helperNavBack
 
 @Composable
 fun VideoChatScreen(navController: NavController?, dataStore: DataStore) {
@@ -41,10 +42,10 @@ fun VideoChatScreen(navController: NavController?, dataStore: DataStore) {
                     dataStore.saveNumberOfCoins(numberOfCoins + reward)
                     dataStore.setGameCompleted(GameTypeSP.CHAT)
                 }
-                navController?.popBackStack()
+                navController.helperNavBack()
             }
         } else {
-            navController?.popBackStack()
+            navController.helperNavBack()
         }
     }
 

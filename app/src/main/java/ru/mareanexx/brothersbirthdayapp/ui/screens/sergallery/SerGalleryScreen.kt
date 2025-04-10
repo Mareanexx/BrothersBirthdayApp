@@ -21,6 +21,7 @@ import ru.mareanexx.brothersbirthdayapp.ui.theme.serGalleryMainColor
 import ru.mareanexx.brothersbirthdayapp.ui.theme.serGalleryTopMenuBackground
 import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 import ru.mareanexx.brothersbirthdayapp.utils.GameTypeSP
+import ru.mareanexx.brothersbirthdayapp.utils.helperNavBack
 
 
 @Composable
@@ -41,10 +42,10 @@ fun SerGalleryScreen(navController: NavController?, dataStore: DataStore) {
                     dataStore.saveNumberOfCoins(numberOfCoins + reward)
                     dataStore.setGameCompleted(GameTypeSP.SERGALLERY)
                 }
-                navController?.popBackStack()
+                navController.helperNavBack()
             }
         } else {
-            navController?.popBackStack()
+            navController.helperNavBack()
         }
     }
 

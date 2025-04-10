@@ -26,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mareanexx.brothersbirthdayapp.R
-import ru.mareanexx.brothersbirthdayapp.ui.screens.mycoins.CoinsAndGamesProgressBlock
 import ru.mareanexx.brothersbirthdayapp.ui.theme.MontserratFamily
 import ru.mareanexx.brothersbirthdayapp.ui.theme.Shapes
 import ru.mareanexx.brothersbirthdayapp.ui.theme.hashTag

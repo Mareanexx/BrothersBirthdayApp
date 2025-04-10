@@ -5,6 +5,8 @@ import ru.mareanexx.brothersbirthdayapp.data.model.RobloxImage
 import ru.mareanexx.brothersbirthdayapp.data.model.RobloxQuizQuestion
 
 object RobloxQuizDB {
+    var firstAccess: Boolean = true
+
     val imageRepository = mutableListOf(
         RobloxImage(R.drawable.roblox_img1),
         RobloxImage(R.drawable.roblox_img2),
