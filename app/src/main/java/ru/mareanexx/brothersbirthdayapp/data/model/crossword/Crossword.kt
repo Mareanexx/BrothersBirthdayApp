@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import ru.mareanexx.brothersbirthdayapp.data.repo.WordDB
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates.OPENED_CORRECT
-import ru.mareanexx.brothersbirthdayapp.ui.view.components.crossword.CrosswordDialogStates.OPENED_INCORRECT
+import ru.mareanexx.brothersbirthdayapp.ui.screens.crossword.components.CrosswordDialogStates
+import ru.mareanexx.brothersbirthdayapp.ui.screens.crossword.components.CrosswordDialogStates.OPENED_CORRECT
+import ru.mareanexx.brothersbirthdayapp.ui.screens.crossword.components.CrosswordDialogStates.OPENED_INCORRECT
 
 object Crossword {
     var selectedWord: MutableState<Word?> = mutableStateOf(null)

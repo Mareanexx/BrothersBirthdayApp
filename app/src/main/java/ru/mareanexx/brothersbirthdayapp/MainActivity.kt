@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import ru.mareanexx.brothersbirthdayapp.ui.theme.BrothersBirthdayAppTheme
-import ru.mareanexx.brothersbirthdayapp.ui.view.AppNavHost
+import ru.mareanexx.brothersbirthdayapp.ui.navigation.AppNavHost
 import ru.mareanexx.brothersbirthdayapp.utils.DataStore
 
 class MainActivity : ComponentActivity() {
