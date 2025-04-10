@@ -18,7 +18,7 @@ object MuseumExhibitDB {
             pictureImagePath = "doors/exhibits/exhibit2.png",
             caption = "Гроза всех озер и рек. Рыбы с открытым ртом смотрят на его таланты и сами прыгают в лодку",
             year = "(2029)",
-            blackCaption = "Экстремальная рыбалка"
+            blackCaption = "Недетская рыбалка"
         ),
         MuseumExhibit(
             id = 3,
@@ -39,7 +39,7 @@ object MuseumExhibitDB {
         MuseumExhibit(
             id = 5,
             doorImagePath = "doors/door5.png",
-            pictureImagePath = "pdoors/exhibits/exhibit5.png",
+            pictureImagePath = "doors/exhibits/exhibit5.png",
             caption = "Супермен 2.0 - улучшенная версия, которая вернула Макдональдс в Россию",
             year = "(2125)",
             blackCaption = "СуперСергоглот"

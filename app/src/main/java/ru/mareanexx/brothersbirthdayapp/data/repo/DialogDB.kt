@@ -4,23 +4,10 @@ import ru.mareanexx.brothersbirthdayapp.data.model.Dialog
 import ru.mareanexx.brothersbirthdayapp.data.model.TextMessage
 import ru.mareanexx.brothersbirthdayapp.data.model.VideoMessage
 
-// TODO() пофиксить путь к видео, тексты сообщений, а также количество сообщений
-
 object DialogDB {
     val repository = listOf(
         Dialog(
             id = 1,
-            personName = "Сеструха",
-            avatarImagePath = "avatars/marianna.png",
-            messages = listOf(
-                VideoMessage("videos/mother.mp4"),
-                TextMessage("С др, БОРАТ!")
-            ),
-            numberOfUnreadMessages = 2,
-            minutesAgoSent = 5
-        ),
-        Dialog(
-            id = 2,
             personName = "Матушка",
             avatarImagePath = "avatars/mother.png",
             messages = listOf(
@@ -31,18 +18,18 @@ object DialogDB {
             minutesAgoSent = 7
         ),
         Dialog(
-            id = 3,
+            id = 2,
             personName = "Бабуся Маринуся",
             avatarImagePath = "avatars/granny2.png",
             messages = listOf(
                 VideoMessage("videos/granny.MP4"),
-                TextMessage("TODO()")
+                TextMessage("Мой любимый внук перед марианай")
             ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 8
         ),
         Dialog(
-            id = 4,
+            id = 3,
             personName = "Деда Андрей",
             avatarImagePath = "avatars/granddad.png",
             messages = listOf(
@@ -53,7 +40,7 @@ object DialogDB {
             minutesAgoSent = 15
         ),
         Dialog(
-            id = 5,
+            id = 4,
             personName = "ПуТАНЬЧИК",
             avatarImagePath = "avatars/tanya.png",
             messages = listOf(
@@ -64,7 +51,7 @@ object DialogDB {
             minutesAgoSent = 16
         ),
         Dialog(
-            id = 6,
+            id = 5,
             personName = "Сударь всея Руси",
             avatarImagePath = "avatars/andrey.png",
             messages = listOf(
@@ -75,7 +62,7 @@ object DialogDB {
             minutesAgoSent = 17
         ),
         Dialog(
-            id = 7,
+            id = 6,
             personName = "Батя",
             avatarImagePath = "avatars/father.png",
             messages = listOf(
@@ -86,7 +73,7 @@ object DialogDB {
             minutesAgoSent = 18
         ),
         Dialog(
-            id = 8,
+            id = 7,
             personName = "Катенок",
             avatarImagePath = "avatars/kate.png",
             messages = listOf(
@@ -97,7 +84,7 @@ object DialogDB {
             minutesAgoSent = 21
         ),
         Dialog(
-            id = 9,
+            id = 8,
             personName = "Игорюша<3",
             avatarImagePath = "avatars/igor.png",
             messages = listOf(
@@ -106,6 +93,6 @@ object DialogDB {
             ),
             numberOfUnreadMessages = 2,
             minutesAgoSent = 22
-        ),
+        )
     )
 }
